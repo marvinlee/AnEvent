@@ -2,162 +2,38 @@
 <html ng-app="myApp">
 <head>
 	<title>Event App</title>
-<!-- Latest compiled and minified CSS -->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-
-<!-- Optional theme -->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
-
+	<base href="/">
+	<!--BOOTSTRAP-->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
 
 </head>
 <body>
 
-<div class="container" name="displayevents" ng-controller="AppCtrl" >
-<div >
-	<button ng-click="AddEventPage()">Add New Event</button>
-</div>
-	<h1>Event Website</h1>
-	<p>Recommended Event</p>
-
-
-	<table class="table" ng-repeat="event in events">
-			
-			<tr>
-			<td><th>Name</th></td><td>{{event.name}}</td>
-			</tr>
-			<tr>		
-			<td><th>Date</th></td><td>{{event.date}}</td>
-			</tr>		
-			<tr>
-			<td><th>Description</th></td><td>{{event.desc}}</td>
-			</tr>
-			<tr>
-			<td><th>Location</th></td><td>{{event.location}}</td>
-			</tr>
-			<tr>
-			<td><th>Organization</th></td><td>{{event.organizer.oname}}</td>
-			</tr>
-			<tr>
-				<td><button ng-click="EventDetails(event)">Explore</button></td>
-			</tr>
-				
-		
-	</table>
-
-<div class="container" name="eventdetails" ng-show="myvalue">
-
-	<h1>Event</h1>
 	
+	<div class="container" name="displayevents" ng-controller="AppCtrl">
 
+		<div>
+			<button ng-click="AddEventPage()">Add New Event</button>
+			<button ng-click="Register()">Register</button>
+			<button ng-click="LoginPage()">Login</button>
+			<button ng-show="logoutbutton" ng-click="Logout()">Logout</button>
+		</div>
 
-	<table class="table"  >
+		<h1>Event Website</h1>
+		<p>Recommended Event</p>
+		<main ng-view></main>
+		
+		
 			
-			<tr>
-			<td><th>Name</th></td><td>{{selectedevent.name}}</td>
-			</tr>
-			<tr>		
-			<td><th>Date</th></td><td>{{selectedevent.date}}</td>
-			</tr>		
-			<tr>
-			<td><th>Location</th></td><td>{{selectedevent.location}}</td>
-			</tr>
-			<tr>
-			<td><th>Event Type</th></td><td>{{selectedevent.type}}</td>
-			</tr>
-			<tr>
-			<td><th>Description</th></td><td>{{selectedevent.desc}}</td>
-			</tr>
-			<tr>
-			<td><th>Organization</th></td><td>{{selectedevent.organizer.oname}}</td>
-			</tr>
-			<tr>
-			<td><th>Organizer</th></td><td>{{selectedevent.organizer.pname}}</td>
-			</tr>
-			<tr>
-			<td><th>Email</th></td><td>{{selectedevent.organizer.email}}</td>
-			</tr>
-			<tr>
-			<td><th>Phone</th></td><td>{{selectedevent.organizer.contact}}</td>
-			</tr>
-			<tr>
-			<td><th>Mobile Phone</th></td><td>{{selectedevent.organizer.mobilecontact}}</td>
-			</tr>
-			<tr>
-				<td><button ng-click="JoinEvent(selectedevent)">Join</button></td>
-			</tr>
-				
-		
-	</table>
+	</div>
 
-
-
-		
-</div>
-<div class="container"  >
-
-<form style="max-width: 700px; margin: 0 auto;" name="test" ng-show="joineventvisible">
-           
-            
-                    <div><P><b>Personal Details</b></P>
-                    <p>Name:
-                        <input id="Your Name" placeholder="Your Name" class="form-control " type="text" ng-model="event.organizer.pname" name="Your Name"
-                             value=""  required="required"/>
-                    </p>
-                    </div>
-          
-              
-                    <div>
-                    <p>Email:
-                        <input id="email" placeholder="Email address" class="form-control" ng-model="event.organizer.email" type="text"
-                               value=""    name="email" required="required"/>
-                    </p>
-                        
-                    </div>
-             
-               
-                    <div>
-                    <p>Phone:
-                        <input id="phone" placeholder="Phone" class="form-control" type="text" ng-model="event.organizer.contact"
-                               value=""   name="phone"/>
-                    </p>
-                    </div>
-    
-                       <div>
-                       <p>Mobile Phone: 
-                        <input id="mobile phone" placeholder="Mobile Phone" class="form-control" ng-model="event.organizer.mobilecontact" type="text"
-                               value=""   name="mobile phone"/></p>
-                    </div>
-              
-
-        
-
-            <div class="row">
-
-               
-                        <p><b>Message: </b></p>
-                        <p><textarea class="form-control" placeholder="Leave A Message" rows="15" name="text"  value="" ng-model="event.organizer.desc" required="required">
-                
-                       </textarea></p>
-                       </div>
-        
-
-            <div class="row">
-                <div class="col-xs-12">
-                    <button class="btn btn-lgs"  ng-click="UserJoin()" >Send</button>
-                </div>
-            </div>
-        </form>
-</div>
-
-<div ng-show="joineventdone"><h1>Done</h1></div>
-		
-</div>
-
-
-
-<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.js"></script>
-<script type="text/javascript" src='https://rawgithub.com/gsklee/ngStorage/master/ngStorage.js'></script>
-<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular-route.js"></script>
-<script src="controllers/controller.js"></script>
+	<!--IMPORT ANGULAR JS-->
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.js"></script>
+	<script type="text/javascript" src='https://rawgithub.com/gsklee/ngStorage/master/ngStorage.js'></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular-route.js"></script>
+	<script src="controllers/controller.js"></script>
+	<script src="controllers/routes.js"></script>
+	<script src="controllers/authServices.js"></script>
 </body>
 </html>

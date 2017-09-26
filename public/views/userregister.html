@@ -1,0 +1,18 @@
+<!--REGISTER PAGE-->
+<div class="container" ng-controller="AppCtrl">
+<form ng-submit="regUser()">
+
+	<label>Email:</label>
+	<input type="text" name="email" ng-model="regData.email">
+	<br>
+
+	<label>Username:</label>
+	<input type="text" name="name" ng-model="regData.username">
+	<br>
+
+	<label>Password:</label>
+	<input type="password" name="password" ng-model="regData.password">
+	<br>
+	<button type="submit">Register</button>
+</form>
+</div>

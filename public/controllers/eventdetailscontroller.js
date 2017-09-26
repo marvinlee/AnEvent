@@ -15,20 +15,18 @@ myApp.factory('myService', function() {
 
 });
 
-myApp.controller('EventDCtrl', ['$scope',  '$http', '$window', 'myService' , function($scope, $http, $window, myService) {
+myApp.controller('EventDCtrl', ['$scope',  '$http', '$location', 'myService', function($scope, $http, $location, myService) {
 	
-  $scope.event = myService.get();
-  console.log( myService.get());
+  $scope.eventID = $location.search().event_id;
+  console.log("event id = " + $location.search().event_id);
 
-	app.service('myService', function($q,$compile,$http) {
-    this.getData = function() {
-        var promise = $http.get('myfile.php');
-        promise = promise.then(function (response) {
-            return response.data;
-        });
-        return promise;
-    };
-});
+  $http.post('/eventdetails', $scope.eventID).then(function(response){
+    
+    //You will get the above response here  in response.data
+    $scope.event = response.data;
+
+  });
+	
   
 	
 }]);

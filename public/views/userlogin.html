@@ -1,0 +1,18 @@
+<!--LOGIN PAGE-->
+<div class="container" ng-controller="AppCtrl">
+<form ng-submit="Login()" ng-show="!logoutbutton">
+
+	
+
+	<label>Username:</label>
+	<input type="text" name="username" ng-model="logData.username">
+	<br>
+
+	<label>Password:</label>
+	<input type="password" name="password" ng-model="logData.password">
+	<br>
+	<button type="submit">Login</button>
+</form>
+
+<div ng-show="logoutbutton">You have logged in!!</div>
+</div>

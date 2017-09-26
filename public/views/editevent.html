@@ -1,0 +1,124 @@
+
+
+<div class="container"  >
+
+<form style="max-width: 700px; margin: 0 auto;" name="test" >
+           
+                    <div>
+                    <span>
+                        Hi, welcome to our website.<br/>If you would like to create an event with us, please complete the information below. 
+                        After we check the details that you provided, We will contact you for all your event information as soon as possible.
+                    </span>
+                    </div>
+
+                    <div><P><b>Event Details</b></P>
+                    <p>Event Name:
+                        <input id="Event Name" class="form-control" type="text" ng-model="selectedevent.name" 
+                              required="required"/>
+                    </p>
+                    </div>
+
+                    <div> 
+                    <p>Event Date:
+                        <input id="Event Date" class="form-control " type="text" ng-model="selectedevent.date" name="Event Date"
+                              required="required"/>
+
+                    </p>
+                    </div>
+
+
+
+                    <div> 
+                    <p>Event location:
+                        <input id="Event location" class="form-control " type="text" ng-model="selectedevent.location" 
+                              required="required"/>
+
+                    </p>
+                    </div>
+
+
+                    <div> 
+                    <p>Event Type:
+                        <input id="Event Type"  class="form-control " type="text" ng-model="selectedevent.type" name="Event Type"
+                             value=""  required="required"/>
+
+                    </p>
+                    </div>
+
+                                
+                     <div class="row">
+
+               
+                       
+                        <p>Event Description:</p>
+                        <p><textarea class="form-control" rows="15" name="text"  value="" ng-model="selectedevent.desc" required="required">
+                
+                       </textarea></p>
+                       </div>
+                        
+
+
+    
+            
+                    <div><P><b>Personal Details</b></P>
+                    <p>Name:
+                        <input id="Your Name" class="form-control " type="text" ng-model="selectedevent.organizer.pname" name="Your Name"
+                             value=""  required="required"/>
+                    </p>
+                    </div>
+          
+
+               
+                    <div>
+                    <p>Organization:
+                        <input id="organization" ng-model="selectedevent.organizer.oname" class="form-control"
+                               value="" type="text" name="organization"/>
+                    </p>
+                    </div>
+              
+
+              
+                    <div>
+                    <p>Email:
+                        <input id="email" class="form-control" ng-model="selectedevent.organizer.email" type="text"
+                               value=""    name="email" required="required"/>
+                    </p>
+                        
+                    </div>
+             
+               
+                    <div>
+                    <p>Phone:
+                        <input id="phone" class="form-control" type="text" ng-model="selectedevent.organizer.contact"
+                               value=""   name="phone"/>
+                    </p>
+                    </div>
+    
+                       <div>
+                       <p>Mobile Phone: 
+                        <input id="mobile phone" class="form-control" ng-model="selectedevent.organizer.mobilecontact" type="text"
+                               value=""   name="mobile phone"/></p>
+                    </div>
+              
+
+        
+
+            <div class="row">
+
+               
+                        <p><b>Message: </b></p>
+                        <p><textarea class="form-control" rows="15" name="text"  value="" ng-model="selectedevent.organizer.desc" required="required">
+                
+                       </textarea></p>
+                       </div>
+        
+
+            <div class="row">
+                <div class="col-xs-12">
+                    <a href="#!/eventdetails/{{selectedevent._id}}"><button class="btn btn-lgs"  ng-click="EditEvent()" >Send</button></a>
+                </div>
+            </div>
+        </form>
+</div>
+
+

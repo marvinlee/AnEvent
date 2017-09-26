@@ -1,0 +1,40 @@
+<!--USER JOIN EVENT FORM-->
+		<div class="container" ng-controller="AppCtrl">
+
+			<form style="max-width:700px;margin:0 auto;" name="test" ng-show="joineventvisible">
+		             
+		        <div>
+		        	<P><b>Personal Details</b></P>
+		        </div>    
+
+		        <div>
+
+		            <p>Name:
+		            	<input placeholder="Your Name" class="form-control " type="text" ng-model="event.organizer.pname" required="required"/>
+		            </p>
+		               
+		            <p>Email:
+		                <input placeholder="Email address" class="form-control" ng-model="event.organizer.email" type="text" required="required"/>
+		            </p>
+		                        
+		            <p>Phone:
+		                <input placeholder="Phone" class="form-control" type="text" ng-model="event.organizer.contact"/>
+		            </p>
+		    
+		            <p>Mobile Phone: 
+		                <input placeholder="Mobile Phone" class="form-control" ng-model="event.organizer.mobilecontact" type="text"/>
+		            </p> 
+
+		            <p><b>Message: </b></p>
+
+		            <p>
+		            	<textarea class="form-control" placeholder="Leave A Message" rows="15" ng-model="event.organizer.desc" required="required"></textarea>
+		            </p>
+
+		           	<div class="col-xs-12">
+		            	<button class="btn btn-lgs" ng-click="UserJoin()">Send</button>
+		          	</div>
+
+		    	</div> 
+		    </form>
+		</div>

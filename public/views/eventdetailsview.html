@@ -1,0 +1,45 @@
+<!--SHOW EVENT DETAILS TABLE-->
+<div class="container" name="eventdetails" ng-controller="EventDetailsCtrl">
+
+			<h1>Event</h1>
+
+			<table class="table" >
+					
+					<tr>
+						<td><th>Name</th></td><td>{{selectedevent.name}}</td>
+					</tr>
+					<tr>		
+						<td><th>Date</th></td><td>{{selectedevent.date}}</td>
+					</tr>		
+					<tr>
+						<td><th>Location</th></td><td>{{selectedevent.location}}</td>
+					</tr>
+					<tr>
+						<td><th>Event Type</th></td><td>{{selectedevent.type}}</td>
+					</tr>
+					<tr>
+						<td><th>Description</th></td><td>{{selectedevent.desc}}</td>
+					</tr>
+					<tr>
+						<td><th>Organization</th></td><td>{{selectedevent.organizer.oname}}</td>
+					</tr>
+					<tr>
+						<td><th>Organizer</th></td><td>{{selectedevent.organizer.pname}}</td>
+					</tr>
+					<tr>
+						<td><th>Email</th></td><td>{{selectedevent.organizer.email}}</td>
+					</tr>
+					<tr>
+						<td><th>Phone</th></td><td>{{selectedevent.organizer.contact}}</td>
+					</tr>
+					<tr>
+						<td><th>Mobile Phone</th></td><td>{{selectedevent.organizer.mobilecontact}}</td>
+					</tr>
+					<tr>
+						<td><button ng-click="JoinEvent(SelectedEvent)">Join</button></td>
+						<td><a href="#!/editevent/{{selectedevent._id}}"><button class="btn btn-lgs">Edit</button></a></td>
+					</tr>
+						
+			</table>
+				
+		</div>

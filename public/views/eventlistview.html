@@ -1,0 +1,25 @@
+<!--RECOMMENDED EVENT LIST TABLE-->
+<div class="container" ng-controller="AppCtrl">
+<table class="table" ng-repeat="event in events">
+				
+				<tr>
+					<td><th>Name</th></td><td>{{event.name}}</td>
+				</tr>
+				<tr>		
+					<td><th>Date</th></td><td>{{event.date}}</td>
+				</tr>		
+				<tr>
+					<td><th>Description</th></td><td>{{event.desc}}</td>
+				</tr>
+				<tr>
+					<td><th>Location</th></td><td>{{event.location}}</td>
+				</tr>
+				<tr>
+					<td><th>Organization</th></td><td>{{event.organizer.oname}}</td>
+				</tr>
+				<tr>
+					<td><a href="#!/eventdetails/{{event._id}}"><button class="btn btn-lgs">Explore</button></a></td>
+				</tr>
+
+</table>
+</div>
