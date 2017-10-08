@@ -17,4 +17,11 @@ var EventSchema = new Schema({
 
 }, {collection: 'eventlist'});
 
+EventSchema.pre('save', function(next){
+	
+	
+	
+	next();
+});
+
 module.exports = mongoose.model('Event', EventSchema);

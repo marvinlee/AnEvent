@@ -31,8 +31,9 @@ myApp.factory('myService', function(){
 //AppCtrl controller
 myApp.controller('AppCtrl', ['$scope', '$http', '$window', 'myService', '$rootScope', function($scope, $http, $window, myService, $rootScope) {
 	
-  $http.get('/eventlist').then(function(response){
-		
+  $http.get('/api/event').then(function(response){
+		console.log("getting event");
+    console.log(response.data);
     //You will get the above response here  in response.data
     $scope.events = response.data;
 
@@ -65,10 +66,16 @@ myApp.controller('AppCtrl', ['$scope', '$http', '$window', 'myService', '$rootSc
   $scope.regUser = function(){
   console.log("registering");
     
-      $http.post('/register', $scope.regData).then(function(data){
+      $http.post('/api/users', $scope.regData).then(function(data){
         console.log("registering");
-        $window.alert("Account created!");
-        $window.location.href = '#!/home';
+        if(data.success){
+          $window.alert("Account created!");
+          $window.location.href = '#!/home';
+        }else{
+          $window.alert("Failed to create account");
+        }
+        
+        
       });
     
 
@@ -111,11 +118,11 @@ myApp.controller('AppCtrl', ['$scope', '$http', '$window', 'myService', '$rootSc
 
   $scope.AddEvent = function(){
       
-    $http.post('/eventlist', $scope.event).then(function(response){
+    /*$http.post('/eventlist', $scope.event).then(function(response){
 
       $window.location.href = '/index.html';
 
-    });
+    });*/
 
   };
 
