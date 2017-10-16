@@ -6,13 +6,17 @@ angular.module('appRoutes', ['ngRoute'])
 
 	.when('/home', {
       templateUrl: 'views/eventlistview.html',
-      controller: 'AppCtrl'
+      controller: 'EventController'
     })
     .when('/eventdetails/:event_id', {
       templateUrl: 'views/eventdetailsview.html',
-      controller: 'EventDetailsCtrl'
+      controller: 'EventDetailsController'
     })
-    .when('/userjoinform/', {
+    .when('/addevent', {
+      templateUrl: 'views/addevent.html',
+      controller: 'AddEventController'
+    })
+    .when('/userjoinform', {
       templateUrl: 'views/userjoinform.html',
       controller: 'AppCtrl'
     })

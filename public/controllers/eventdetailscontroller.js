@@ -1,33 +1,32 @@
-var myApp = angular.module('myApp', ['ngStorage','ngRoute']);
-myApp.factory('myService', function() {
-   var savedData = {}
-   function set(data) {
-     savedData = data;
-   }
-   function get() {
-    return savedData;
-   }
+angular.module('EventDetailsApp', ['ngStorage','ngRoute', 'appRoutes'])
 
-   return {
-    set: set,
-    get: get
-   }
+.controller('EventDetailsController', function($scope, $http, $window, $routeParams, $location) {
+	
+	$scope.event_id = $routeParams.event_id;
+	console.log('event id = ' + $scope.event_id);
+
+	$http.get('/api/event/' + $scope.event_id).then(function(response){
+		console.log("getting specific event");
+    	console.log(response.data);
+    	//You will get the above response here  in response.data
+    	$scope.selectedevent = response.data;
+
+  	});
+
+  	$scope.DeleteEvent = function(event){
+  		console.log('event = ' + $scope.selectedevent._id);
+  		var event_id = {event_id: $scope.selectedevent._id};
+  		$http.delete('/api/event/remove/' + $scope.selectedevent._id).then(function(response){
+			//console.log("getting specific event");
+	    	//console.log(response.data);
+	    	//You will get the above response here  in response.data
+	    	//$scope.selectedevent = response.data;
+	    	$window.alert('Event deleted!');
+	    	$location.path('/home');
+
+  		});
+
+  	};
+
 
 });
-
-myApp.controller('EventDCtrl', ['$scope',  '$http', '$location', 'myService', function($scope, $http, $location, myService) {
-	
-  $scope.eventID = $location.search().event_id;
-  console.log("event id = " + $location.search().event_id);
-
-  $http.post('/eventdetails', $scope.eventID).then(function(response){
-    
-    //You will get the above response here  in response.data
-    $scope.event = response.data;
-
-  });
-	
-  
-	
-}]);
-

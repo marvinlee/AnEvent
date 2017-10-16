@@ -7,114 +7,19 @@ var router = express.Router();
 var User = require('./models/user');
 var Event = require('./models/event');
 var appRoutes = require('./routes/api');
+var userRoutes = require('./routes/user');
+var adminRoutes = require('./routes/admin');
 
 //bodyparser configuration
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use('/api', appRoutes);
+app.use('/user', userRoutes);
+app.use('/admin', adminRoutes);
 
 //define views folder
 app.use(express.static(__dirname + "/public")); 
 
-//GET eventlist database data
-/*app.get('/eventlist', function(req, res){
-    
-    Event.find({}, function(err, docs){
-        res.send(docs);
-    });
-    
-    
-});*/
-
-/*(app.post('/login', function(req, res){
-    console.log("get data login");
-    var username = req.body.username;
-    var password = req.body.password;
-    console.log("get data login");
-    userlogindb.user.findOne({username: username, password: password},function(err, docs){
-        console.log("loging in");
-        console.log(docs);
-        res.json(docs);
-
-    });
-});
-
-app.post('/register', function(req, res){
-
-    //var username = req.body.username;
-   // var password = req.body.password;
-    //var email = req.body.email;
-
-    userlogindb.user.insert(req.body, function(err, doc){
-        console.log("registering to db");
-        console.log(doc);
-        res.json(doc);
-        
-    });
-
-   
-});
-
-//POST data into eventlist database
-app.post('/eventlist', function (req, res){
-   
-    db.eventlist.insert(req.body, function(err, doc){
-
-    	res.json(doc);
-
-    });
-
-});
-
-//POST user subscribe event to userevent database
-app.post('/userevent', function (req, res){
-    
-    usereventdb.userevent.insert(req.body, function(err, doc){
-
-    	res.json(doc);
-    	
-    });
-
-});
-
-app.post('/geteventdetail', function(req, res){
-    
-
-    db.eventlist.findOne({_id: mongojs.ObjectId(req.body.event_id)},function(err, docs){
-
-    	
-    	res.json(docs);
-
-    });
-    
-});
-
-app.post('/editevent', function (req, res){
-   
-   console.log("edit req body = " + JSON.stringify(req.body));
-
-    db.eventlist.findAndModify({
-    	query: { _id: mongojs.ObjectId(req.body._id) },
-    	update: { $set: {
-    		name : req.body.name,
-    		date : req.body.date,
-    		type : req.body.type,
-    		desc : req.body.desc, 
-    		location : req.body.location,
-    		organizer : {	pname : req.body.organizer.pname,
-    						oname : req.body.organizer.oname,
-    						email : req.body.organizer.email,
-    						contact : req.body.organizer.contact,
-    						mobilecontact : req.body.organizer.mobilecontact, 
-    						desc : req.body.organizer.desc
-    					}
-    				}
-   }}, function (err, doc, lastErrorObject) {
-     	
-	});
-    
-
-});*/
 
 //start listening page
 app.listen(3000);

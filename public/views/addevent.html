@@ -1,16 +1,4 @@
-<!DOCTYPE>
-<html ng-app="myApp">
-<head>
-    <title>Event App</title>
-<!-- Latest compiled and minified CSS -->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-
-<!-- Optional theme -->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
-</head>
-<body>
-
-<div class="container"  ng-controller="AppCtrl">
+<div class="container" >
 
 <form style="max-width: 700px; margin: 0 auto;" name="test" >
            
@@ -73,7 +61,7 @@
             
                     <div><P><b>Personal Details</b></P>
                     <p>Name:
-                        <input id="Your Name" placeholder="Your Name" class="form-control " type="text" ng-model="event.organizer.pname" name="Your Name"
+                        <input id="Your Name" placeholder="Your Name" class="form-control " type="text" ng-model="event.organizer.personname" name="Your Name"
                              value=""  required="required"/>
                     </p>
                     </div>
@@ -82,7 +70,7 @@
                
                     <div>
                     <p>Organization:
-                        <input id="organization" placeholder="Organization Name" ng-model="event.organizer.oname" class="form-control"
+                        <input id="organization" placeholder="Organization Name" ng-model="event.organizer.organizationname" class="form-control"
                                value="" type="text" name="organization"/>
                     </p>
                     </div>
@@ -131,12 +119,5 @@
             </div>
         </form>
 </div>
-<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.js"></script>
-<script type="text/javascript" src='https://rawgithub.com/gsklee/ngStorage/master/ngStorage.js'></script>
-<script src="controllers/controller.js"></script> 
-<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular-route.js"></script>
 
-</body>
-
-</html>
 

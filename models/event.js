@@ -13,15 +13,16 @@ var EventSchema = new Schema({
 					email: String,
 					contact: String,
 					mobilecontact: String
-				}
+				},
+	status: String
 
 }, {collection: 'eventlist'});
 
 EventSchema.pre('save', function(next){
-	
+	var event = this;
 	
 	
 	next();
-});
+}, {collection: 'eventlist'});
 
 module.exports = mongoose.model('Event', EventSchema);

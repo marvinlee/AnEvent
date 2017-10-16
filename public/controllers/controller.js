@@ -1,76 +1,52 @@
-var myApp = angular.module('myApp', ['ngStorage','ngRoute', 'appRoutes']);
-
+var myApp = angular.module('myApp', ['ngStorage','ngRoute', 'appRoutes', 'EventDetailsApp', 'authServices', 'EventApp', 'AddEventApp']);
 
 
 //Service to pass data between controllers
-myApp.factory('myService', function(){
-
-  var myList = [];
-  var set = function(newObj){
-
-    myList.push(newObj);
-
-  }
-
-  var get = function(){
-
-      return myList;
-
-  }
-
-  return{
-
-    set: set,
-    get: get
-
-  };
-
+myApp.config(function($httpProvider){
+  $httpProvider.interceptors.push('AuthInterceptors');
 });
-
+  
 
 //AppCtrl controller
-myApp.controller('AppCtrl', ['$scope', '$http', '$window', 'myService', '$rootScope', function($scope, $http, $window, myService, $rootScope) {
+myApp.controller('AppCtrl', function(Auth, $scope, $http, $window, $location) {
 	
-  $http.get('/api/event').then(function(response){
-		console.log("getting event");
-    console.log(response.data);
-    //You will get the above response here  in response.data
-    $scope.events = response.data;
-
-  });
-  console.log('username = ' + $window.localStorage.getItem("currentUser"));
-  if($window.localStorage.getItem("currentUser") == '' || $window.localStorage.getItem("currentUser") == null){
-    $scope.logoutbutton = false;
+  
+  
+  if(Auth.isLoggedIn()){
+    Auth.getUser().then(function(data){
+      console.log(data);
+    });
   }else{
-    $scope.logoutbutton = true;
+    console.log('Failure, user is not logged in.');
   }
 
   $scope.AddEventPage = function(){
   
-    $window.location.href = '/eventorder.html';
+    $location.path('/addevent');
 
   };
 
    $scope.Register = function(){
   
-    $window.location.href = '#!/register';
+    $location.path('/register');
 
   };
 
   $scope.LoginPage = function(){
   
-    $window.location.href = '#!/login';
+    $location.path('/login');
 
   };
 
   $scope.regUser = function(){
   console.log("registering");
-    
-      $http.post('/api/users', $scope.regData).then(function(data){
+      $scope.regData.usertype = 'User';
+      $http.post('/user/register', $scope.regData).then(function(data){
         console.log("registering");
-        if(data.success){
+        console.log("data.success = " +  JSON.stringify(data));
+        if(data.data.success){
           $window.alert("Account created!");
-          $window.location.href = '#!/home';
+          $location.path('/home');
         }else{
           $window.alert("Failed to create account");
         }
@@ -82,15 +58,9 @@ myApp.controller('AppCtrl', ['$scope', '$http', '$window', 'myService', '$rootSc
   };
 
   $scope.Logout = function(){
-    console.log("Logout");
-    console.log($rootScope.username);
-    $rootScope.username = '';
-    $window.localStorage.setItem('currentUser', '');
-    $window.alert("Logout!");
-    console.log("after logout" + $rootScope.username);
-    $scope.logoutbutton = false;
-
-     $window.location.href = '#!/home';
+    Auth.logout();
+    $window.alert('Account Logout!');
+    $location.path('/home');
   };
 
   $scope.Login = function(){
@@ -101,16 +71,22 @@ myApp.controller('AppCtrl', ['$scope', '$http', '$window', 'myService', '$rootSc
       password : $scope.logData.password,
       
     };
-      $http.post('/login', user).then(function(data){
+      Auth.login(user).then(function(data){
         console.log("successful login");
         console.log(data.data.username);
-        $rootScope.username = data.data.username;
-        $window.localStorage.setItem('currentUser', data.data.username);
-        console.log('current user = ' + $window.localStorage.getItem('currentUser'));
-        $scope.logoutbutton = true;
-        $window.alert("Welcome, " + $window.localStorage.getItem('currentUser'));
-        $window.location.href = '#!/home';
-        console.log($scope.logoutbutton);
+        //$rootScope.username = data.data.username;
+        //$window.localStorage.setItem('currentUser', data.data.username);
+        //console.log('current user = ' + $window.localStorage.getItem('currentUser'));
+        if(data.data.success){
+          $window.alert("Successful Login!");
+          $location.path('/home');
+        }else{
+          $window.alert("Cannot authenticate user");
+        }
+        //$scope.logoutbutton = true;
+        //$window.alert("Welcome, " + $window.localStorage.getItem('currentUser'));
+        //$window.location.href = '#!/home';
+        //console.log($scope.logoutbutton);
         
       });
 
@@ -126,22 +102,14 @@ myApp.controller('AppCtrl', ['$scope', '$http', '$window', 'myService', '$rootSc
 
   };
 
-  /*$scope.EventDetails = function(event){
-    console.log("event id = "+ event._id);
-    $window.location.href = '/eventdetails.html?event_id=' + event._id;
-    /*$scope.selectedevent = event;
-    $scope.myvalue = true;  
-    $scope.joineventvisible = false;
-    $scope.joineventdone = false;  */
-    
-  //};
+
 
   $scope.JoinEvent = function(event){
       
     console.log(event);
     $scope.joiningevent = event;
     $scope.joineventvisible = true;  
-    $window.location.href = '#!/userjoinform';
+    $location.path('/userjoinform');
     
   };
 
@@ -159,42 +127,10 @@ myApp.controller('AppCtrl', ['$scope', '$http', '$window', 'myService', '$rootSc
       $scope.joineventdone = true;  
 
     });*/
-      $window.location.href = '#!/home';
+      $location.path('/home');
   };
 
-}]);
+});
 
 
-myApp.controller('EventDetailsCtrl', ['$scope',  '$http', '$location', 'myService', '$routeParams', function($scope, $http, $location, myService, $routeParams) {
-  
-  var eventdetailsID = {
-    
-      event_id : $routeParams.event_id,
-      
-    };
-  
-  console.log("event id = " + $routeParams.event_id);
-
-  $http.post('/geteventdetail', eventdetailsID).then(function(response){
-    
-    //You will get the above response here  in response.data
-    $scope.selectedevent = response.data;
-    console.log(response.data);
-
-  });
-  
-  $scope.EditEvent = function(){
-      
-      console.log("selectedevent = " + JSON.stringify($scope.selectedevent));
-    $http.post('/editevent', $scope.selectedevent).then(function(response){
-
-      //$window.location.href = '/index.html';
-      console.log("updated = " + response.data);
-
-
-    });
-
-  };
-  
-}]);
 
