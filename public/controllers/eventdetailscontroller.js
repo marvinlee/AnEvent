@@ -13,17 +13,6 @@ angular.module('EventDetailsApp', ['ngStorage','ngRoute', 'appRoutes', 'authServ
 
   });
 
-    //Delete event function
-  	$scope.DeleteEvent = function(event){
-
-  		var event_id = {event_id: $scope.selectedevent._id};
-  		$http.delete('/api/event/remove/' + $scope.selectedevent._id).then(function(response){
-			
-	    	$window.alert('Event deleted!');
-	    	$window.history.back();
-
-  		});
-
-  	};
+    
 
 });

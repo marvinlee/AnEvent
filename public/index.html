@@ -10,30 +10,25 @@
 </head>
 <body>
 
-	
 	<div class="container" name="displayevents" ng-controller="AppCtrl">
 
 		<div>
-		<br>
 
-			<a href="#!/addevent"><button ng-show="isLoggedIn">Add New Event</button></a>
-
+			<br>
 			<a href="#!/home"><button >Home</button></a>
 			<a href="#!/register"><button ng-show="!isLoggedIn" >Register</button></a>
 			<a href="#!/login"><button ng-show="!isLoggedIn" >Login</button></a>
 			<a ><button ng-show="isLoggedIn" ng-click="MyAccount()">My Account</button></a>
-
 			<a href="#!/addevent"><button ng-show="isLoggedIn">Add New Event</button></a>
-
 			<a ><button ng-show="isLoggedIn" ng-click="Logout()">Logout</button></a>
+
 		</div>
 
-		<h1>Event Website</h1>
+		<h1>AnEvent</h1>
 		<p>Recommended Event</p>
 		<main ng-view></main>
 		
 		
-			
 	</div>
 
 	<!--IMPORT ANGULAR JS-->

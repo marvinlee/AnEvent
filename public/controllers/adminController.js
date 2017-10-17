@@ -44,20 +44,6 @@ if(Auth.isLoggedIn()){
 
   	});
 
-    //Delete Event function to remove event
-  	$scope.DeleteEvent = function(event){
-  		
-  		var event_id = {event_id: $scope.selectedevent._id};
-  		$http.delete('/api/event/remove/' + $scope.selectedevent._id).then(function(response){
-			
-	    	$window.alert('Event deleted!');
-	    	$window.history.back();
-
-  		});
-
-  	};
-
-
 })
 
 //admin event details controller
@@ -80,6 +66,20 @@ if(Auth.isLoggedIn()){
       $http.put('/admin/approveEvent/' + $scope.selectedevent._id).then(function(response){
 
         $window.alert('Event approved!');
+        $window.history.back();
+
+      });
+
+    };
+
+
+    //Delete Event function to remove event
+    $scope.DeleteEvent = function(event){
+      
+      var event_id = {event_id: $scope.selectedevent._id};
+      $http.delete('/api/event/remove/' + $scope.selectedevent._id).then(function(response){
+      
+        $window.alert('Event deleted!');
         $window.history.back();
 
       });
