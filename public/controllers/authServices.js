@@ -1,8 +1,10 @@
+//authentication service
 angular.module('authServices', [])
 
 .factory('Auth', function($http, AuthToken){
 	var authFactory = {};
 
+	//login method
 	authFactory.login = function(regData){
 		return $http.post('/user/login', regData).then(function(data){
 			AuthToken.setToken(data.data.token);
@@ -10,6 +12,7 @@ angular.module('authServices', [])
 		});
 	};
 
+	//check is user logged in method
 	authFactory.isLoggedIn = function(){
 
 		if(AuthToken.checkToken()){
@@ -19,6 +22,7 @@ angular.module('authServices', [])
 		}
 	};
 
+	//get logged in user information from token
 	authFactory.getUser = function(){
 
 		if(AuthToken.getToken()){
@@ -28,33 +32,32 @@ angular.module('authServices', [])
 		}
 	};
 
+	//logout method, reset token
 	authFactory.logout = function(){
 		AuthToken.setToken();
 	};
-
-
-
-	
 
 	return authFactory;
 
 })
 
+//Authentication token service
 .factory('AuthToken', function($window){
 	var authTokenFactory = {};
 
-
+	//set token method
 	authTokenFactory.setToken = function(token){
 		$window.localStorage.setItem('token', token);
 	};
 
-
+	//get token method
 	authTokenFactory.getToken = function(){
 		
 		return $window.localStorage.getItem('token');
 		
 	};
 
+	//check token existed
 	authTokenFactory.checkToken = function(){
 		var temp = $window.localStorage.getItem('token');
 
@@ -70,6 +73,7 @@ angular.module('authServices', [])
 	return authTokenFactory;
 })
 
+//Authentication Interceptors for headers
 .factory('AuthInterceptors', function(AuthToken){
 	var authInterceptorsFactory = {};
 

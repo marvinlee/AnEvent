@@ -1,11 +1,7 @@
-
+//Main Controller
 var myApp = angular.module('myApp', ['ngStorage','ngRoute', 'appRoutes', 'authServices', 'EventApp','EditEventApp', 'EventDetailsApp', 'AddEventApp', 'AdminApp']);
 
-var myApp = angular.module('myApp', ['ngStorage','ngRoute', 'appRoutes', 'EventDetailsApp', 'authServices', 'EventApp','EditEventApp', 'AddEventApp', 'AdminApp']);
 
-
-
-//Service to pass data between controllers
 myApp.config(function($httpProvider){
   $httpProvider.interceptors.push('AuthInterceptors');
 });
@@ -14,25 +10,27 @@ myApp.config(function($httpProvider){
 //AppCtrl controller
 myApp.controller('AppCtrl', function(Auth, $scope, $http, $window, $location, $rootScope) {
 	
+  //Referesh when user login or logout
   $rootScope.$on('routeChangeStart', function(){
     if(Auth.isLoggedIn()){
-      console.log('Success: user is logged in');
+      
       $scope.isLoggedIn = true;
+
+      //get user information with token
       Auth.getUser().then(function(data){
-        console.log(data.data.username);  
-        
+         
         if(data.data.success){
           $scope.isLoggedIn = true;
           $scope.username = data.data.username;
           $scope.email = data.data.email;
-          console.log(data);
+          
         }else{
           $scope.isLoggedIn = false;
-          console.log(data);
+          
         }
       });
     }else{
-      console.log('Failure : User is not logged in');
+      //no user logged in
       $scope.isLoggedIn = false;
       $scope.username ='';
       $scope.email = '';
@@ -41,16 +39,16 @@ myApp.controller('AppCtrl', function(Auth, $scope, $http, $window, $location, $r
   });
 
   
-  
+  //Check if any user session when visiting the page
   if(Auth.isLoggedIn()){
     Auth.getUser().then(function(data){
       if(data.data.success){
         $scope.isLoggedIn = true;
         $scope.username = data.data.username;
           $scope.email = data.data.email;
-        console.log(data);
+        
         if(data.data.usertype == 'Admin'){
-          console.log('type = ' + data.data.usertype);
+          
           $scope.admin = true;
         }else{
           $scope.admin = false;
@@ -63,12 +61,12 @@ myApp.controller('AppCtrl', function(Auth, $scope, $http, $window, $location, $r
     });
   }else{
     $scope.isLoggedIn = false;
-    console.log('Failure, user is not logged in.');
+    
   }
 
-
+  //MyAccount button to check if go to admin profile or user profile
   $scope.MyAccount = function(){
-  console.log('usertype = ' + Auth.isLoggedIn());
+  
     if(Auth.isLoggedIn()){
       Auth.getUser().then(function(data){
 
@@ -83,14 +81,12 @@ myApp.controller('AppCtrl', function(Auth, $scope, $http, $window, $location, $r
 
   };
 
-  
-
-   
-
+  //register User form submitted
   $scope.regUser = function(){
   
       $scope.regData.usertype = 'User';
       
+        //route to register user
         $http.post('/user/register', $scope.regData).then(function(data){
           
           if(data.data.success){
@@ -108,6 +104,7 @@ myApp.controller('AppCtrl', function(Auth, $scope, $http, $window, $location, $r
 
   };
 
+  //logout button to remove token from localstorage
   $scope.Logout = function(){
     Auth.logout();
     $window.alert('Account Logout!');
@@ -115,6 +112,7 @@ myApp.controller('AppCtrl', function(Auth, $scope, $http, $window, $location, $r
     $location.path('/home');
   };
 
+  //Login function
   $scope.Login = function(){
     
     var user = {
@@ -124,10 +122,12 @@ myApp.controller('AppCtrl', function(Auth, $scope, $http, $window, $location, $r
       
     };
 
+      //Authentication service function from authService
       Auth.login(user).then(function(data){
     
         if(data.data.success){
           
+          //check if admin or normal user
           if(data.data.usertype == 'Admin'){
 
             $scope.isLoggedIn = true;

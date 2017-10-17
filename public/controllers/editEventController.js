@@ -4,7 +4,7 @@ angular.module('EditEventApp', ['ngStorage','ngRoute', 'appRoutes', 'authService
 	
 	$scope.event_id = $routeParams.event_id;
 
-
+  //Check if user logged in
   if(Auth.isLoggedIn()){
       Auth.getUser().then(function(data){
 
@@ -13,13 +13,14 @@ angular.module('EditEventApp', ['ngStorage','ngRoute', 'appRoutes', 'authService
       });
     }
 
+    //get an event details
 	$http.get('/api/event/' + $scope.event_id).then(function(response){
 
     	$scope.selectedevent = response.data;
 
   	});
 
-
+  //edit event button
   $scope.EditEvent = function(event){
 
       var event_id = {event_id: $scope.selectedevent._id};

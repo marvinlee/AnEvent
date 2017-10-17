@@ -1,3 +1,4 @@
+//user api function
 var express = require('express');
 var router = express.Router();
 var jwt = require('jsonwebtoken');
@@ -5,9 +6,9 @@ var secret = 'testing';
 
 var Event = require('../models/event');
 var User = require('../models/user');
-var UserEvent = require('../models/userevent');
 
 
+	//register api
 	//localhost:3000/user/register
 	router.post('/register', function(req, res){
 		var user = new User();
@@ -31,6 +32,7 @@ var UserEvent = require('../models/userevent');
 		}
 	});
 
+	//login api
 	//localhost:3000/user/login
 	router.post('/login', function(req, res){
 
@@ -63,29 +65,8 @@ var UserEvent = require('../models/userevent');
 
 	});
 
-	router.post('/joinevent', function(req, res){
-		var userevent = new UserEvent();
-		userevent.username = req.body.username;
-		userevent.user_id = req.body.user_id;
-		userevent.event_id = req.body.event_id;
-		
-		if(userevent.username == null || userevent.username == '' || userevent.user_id == null || userevent.user_id == '' || userevent.event_id == null || userevent.event_id == ''){
-			res.json({success: false, message: 'Failed to join event'});
-			
-		} else {
-			userevent.save(function(err){
-				if(err){
-					res.json({success: false, message: 'Event had been joined'});
-					
-				}else{
-					res.json({success: true, message: 'Successfully joined event'});
-					
-				}
-			});
-		}
-	});
-
-
+	//make user admin 
+	//localhost:3000/user/makeUserAdmin/:user_id
 	router.put('/makeUserAdmin/:user_id', function(req, res){
 		var query = {_id: req.params.user_id};
 		
@@ -100,23 +81,7 @@ var UserEvent = require('../models/userevent');
 		});
 	});
 
-
-	router.put('/updateUserProfile/:user_id', function(req, res){
-
-		var query = {_id: req.params.user_id};
-		var user = new User();
-
-		User.update(query, user,  function(err, doc){
-		    if (doc.nModified == 0){
-		    	return res.send({success: false});
-		    }else{
-		    	return res.send({success: true});
-		    }
-		    
-		});
-	});
-
-
+	//check token existed, decode token
 	router.use(function(req, res, next){
 		var token = req.body.token || req.body.query || req.headers['x-access-token'];
 
@@ -135,6 +100,7 @@ var UserEvent = require('../models/userevent');
 		}
 	});
 
+	//get logged in user information
 	//localhost:3000/user/currentUser
 	router.post('/currentUser', function(req, res){
 		res.send(req.decoded);
