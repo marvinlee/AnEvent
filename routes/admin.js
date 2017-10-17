@@ -16,8 +16,6 @@ var User = require('../models/user');
 
 		//res.send("api works");
 		Event.find({status: 'Waiting for approval by Admin'}, function(err, docs){
-			console.log('inside admin');
-			//console.log(docs.data);
 
 			if(docs.name =='undefined'){
 				docs.success = false;
@@ -35,13 +33,7 @@ var User = require('../models/user');
 
 		Event.findById(req.params.event_id, function(err, docs){
 
-		console.log('got Event');
-		console.log('Event id = ' + req.params.event_id);
-		//res.send("api works");
 		Event.findById(req.params.event_id, function(err, docs){
-			console.log('got Event');
-			console.log(docs.data);
-
 
         	res.send(docs);
     	});

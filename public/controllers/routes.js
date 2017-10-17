@@ -48,8 +48,4 @@ angular.module('appRoutes', ['ngRoute'])
       redirectTo: '/home'
     });
 
-    /*$locationProvider.html5Mode({
-    	enable: true,
-    	requireBase: false
-    });*/
 });

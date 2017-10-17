@@ -85,15 +85,6 @@ var UserEvent = require('../models/userevent');
 		}
 	});
 
-	/*router.post('/removeAllUser', function(req, res){
-		User.remove().exec();
-		User.find({}, function(err, docs){
-			console.log('got User');
-			console.log(docs.data);
-
-        	res.send(docs);
-		});
-	});*/
 
 	router.put('/makeUserAdmin/:user_id', function(req, res){
 		var query = {_id: req.params.user_id};
@@ -109,30 +100,12 @@ var UserEvent = require('../models/userevent');
 		});
 	});
 
-	/*router.put('/updateUserProfile/:username', function(req, res){
-		var query = {username: req.params.username};
-		var user = new User();
-		
-		user.email = req.body.email;
-		console.log('check = ' + req.body.email);
-		User.update(query, user, function(err, doc){
-		    if (doc.nModified == 0){
-		    	return res.send({success: false});
-		    }else{
-		    	return res.send({success: true});
-		    }
-		    //return res.send(doc);
-		    
-		});
-	});*/
 
 	router.put('/updateUserProfile/:user_id', function(req, res){
-		console.log('email = ' + req.params.user_id);
+
 		var query = {_id: req.params.user_id};
 		var user = new User();
-		
-		//user.email = req.body.email;
-		
+
 		User.update(query, user,  function(err, doc){
 		    if (doc.nModified == 0){
 		    	return res.send({success: false});
@@ -161,11 +134,6 @@ var UserEvent = require('../models/userevent');
 			res.json({success: false, message : 'No token provided'});
 		}
 	});
-
-	//localhost:3000/user/currentUserType
-	/*router.post('/currentUserType', function(req, res){
-		res.send(req.decoded.usertype);
-	});*/
 
 	//localhost:3000/user/currentUser
 	router.post('/currentUser', function(req, res){

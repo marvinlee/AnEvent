@@ -16,12 +16,8 @@ var User = require('../models/user');
 	
 	//localhost:3000/api/event
 	router.get('/event', function(req, res){
-		//res.send("api works");
+
 		Event.find({status: 'Approved by Admin'}, function(err, docs){
-
-			console.log('got Event');
-			console.log(docs.data);
-
 
         	res.send(docs);
     	});
@@ -117,8 +113,7 @@ var User = require('../models/user');
 
 	//localhost:3000/api/event
 	router.put('/event/update/:event_id', function(req, res){
-		//res.send("api works");
-		console.log('testing update event' + req.body.name);
+	
 		var query = {_id: req.params.event_id};
 		var event = new Event();
 		event.name = req.body.name;
@@ -136,8 +131,6 @@ var User = require('../models/user');
 		
 
 		Event.update(query, event, function(err, docs){
-			console.log('got Event');
-			console.log(docs.data);
 			
         	res.send(docs);
     	});
@@ -153,20 +146,15 @@ var User = require('../models/user');
 	})
 
 	router.put('/event/update/getlock/:event_id', function(req, res){
-		//res.send("api works");
-		console.log('user id = ' + JSON.stringify(req.params));
+		
 		var query = {_id: req.params.event_id};
 		var event = new Event();
 		
-		
-		console.log('get lock for Event');
 		Event.findOne(query).select('_id lock').exec(function(err, event){
-			console.log('finding Event');
-			console.log('printing = ' + JSON.stringify(event));
+
 			if(event.lock){
 				Event.update(query, {lock: 'false'}, function(err, docs){
-					console.log('got Event');
-					console.log(docs.data);
+
 					if(err){
 						res.json({success: false, message: 'failed to get lock'});
 					}else{
@@ -181,7 +169,6 @@ var User = require('../models/user');
 				res.json({success: false, message: 'lock had been acquired by other user'});
 			}
 
-        	//res.send(docs);
     	});
 
 		
@@ -216,12 +203,6 @@ var User = require('../models/user');
 router.post('/removeAllEvent', function(req, res){
 		Event.remove().exec();
 		Event.find({}, function(err, docs){
-
-		
-
-			console.log('got User');
-			console.log(docs.data);
-
 
         	res.send(docs);
 		});

@@ -11,7 +11,7 @@ angular.module('authServices', [])
 	};
 
 	authFactory.isLoggedIn = function(){
-		//console.log('get token = ' + AuthToken.getToken());
+
 		if(AuthToken.checkToken()){
 			return true;
 		}else{
@@ -20,7 +20,7 @@ angular.module('authServices', [])
 	};
 
 	authFactory.getUser = function(){
-		//console.log('get token = ' + AuthToken.getToken());
+
 		if(AuthToken.getToken()){
 			return $http.post('/user/currentUser');
 		}else{
@@ -43,7 +43,7 @@ angular.module('authServices', [])
 .factory('AuthToken', function($window){
 	var authTokenFactory = {};
 
-	//AuthToken.setToken(token);
+
 	authTokenFactory.setToken = function(token){
 		$window.localStorage.setItem('token', token);
 	};
@@ -57,12 +57,12 @@ angular.module('authServices', [])
 
 	authTokenFactory.checkToken = function(){
 		var temp = $window.localStorage.getItem('token');
-		//console.log('temp = ' + temp);
+
 		if(temp == '' || temp == 'undefined' || temp == null){
-			console.log('inside temp = false = ');
+
 			return false;
 		}else{
-			console.log('inside temp = true = ');
+
 			return true;
 		}
 	}
