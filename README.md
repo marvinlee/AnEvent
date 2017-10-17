@@ -19,8 +19,49 @@ This program used MEAN stack to develop so that you need to install nodejs, mong
 # Development environment 
 
 
+# Coding Style Guideline
 
+-constant variable name in UPPER_CASE, may include underscores
 
+-function name in UpperCamelCase no underscores
+
+-service name in lowerCamelCase no underscores 
+
+-variable name in lowercase, may include underscores
+
+-filenames must be lowercase, may include underscores
+
+-comment line can be used in //, /*...*/, for multiple line, subsequence line must have * in front of the line.
+
+-have whitespace between each function, in every function have whitespace in the beginning and ending of function code.
+
+-no line break before the opening braces
+
+-line break after opening braces
+
+-line break before closing braces
+
+-line break after closing braces, if there are following by else, catch, while etc. no line break after closing braces.
+
+-for object array, have block-like structure for every variable.
+
+-for normal array, may use normal format a = [1,2,3];
+
+-have comment on each function
+
+-have a space before and after =, +, *, ^, /, () in formula or string for example a = a + b ^ c * d + (e + f) / g;
+
+-use single quote rather than double quote for string
+
+-maximum 80 character in a line
+
+-if there are many closing braces for a function, can be in the same line, for example )});
+
+-if there are many closing braces for several function, should be in different line for different function
+
+-have a line if there is nothing in braces {} for if, elseif, else, catch etc.
+
+-must have {} for if function even if there is only a line of code in it.
 
 
 
