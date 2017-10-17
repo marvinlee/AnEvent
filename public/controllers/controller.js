@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 var myApp = angular.module('myApp', ['ngStorage','ngRoute', 'appRoutes', 'authServices', 'EventApp','EditEventApp', 'EventDetailsApp', 'AddEventApp', 'AdminApp']);
+=======
+var myApp = angular.module('myApp', ['ngStorage','ngRoute', 'appRoutes', 'EventDetailsApp', 'authServices', 'EventApp','EditEventApp', 'AddEventApp', 'AdminApp']);
+>>>>>>> c63432a2c074514c5647fc508ded6e25edf36488
 
 
 //Service to pass data between controllers

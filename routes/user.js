@@ -5,6 +5,7 @@ var secret = 'testing';
 
 var Event = require('../models/event');
 var User = require('../models/user');
+var UserEvent = require('../models/userevent');
 
 
 	//localhost:3000/user/register

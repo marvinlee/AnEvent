@@ -9,9 +9,16 @@ var User = require('../models/user');
 
 	//localhost:3000/admin/event/approve
 	router.get('/event/approve', function(req, res){
+<<<<<<< HEAD
 		
 		Event.find({status: 'Waiting for approval by Admin'}, function(err, docs){
 			
+=======
+		//res.send("api works");
+		Event.find({status: 'Waiting for approval by Admin'}, function(err, docs){
+			console.log('inside admin');
+			//console.log(docs.data);
+>>>>>>> c63432a2c074514c5647fc508ded6e25edf36488
 			if(docs.name =='undefined'){
 				docs.success = false;
 			}else{
@@ -24,9 +31,19 @@ var User = require('../models/user');
 
 	//localhost:3000/admin/event/:event_id
 	router.get('/event/:event_id', function(req, res){
+<<<<<<< HEAD
 		
 		Event.findById(req.params.event_id, function(err, docs){
 			
+=======
+		console.log('got Event');
+		console.log('Event id = ' + req.params.event_id);
+		//res.send("api works");
+		Event.findById(req.params.event_id, function(err, docs){
+			console.log('got Event');
+			console.log(docs.data);
+
+>>>>>>> c63432a2c074514c5647fc508ded6e25edf36488
         	res.send(docs);
     	});
 	});

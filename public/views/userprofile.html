@@ -1,5 +1,9 @@
 <!--User Profile Page-->
+<<<<<<< HEAD
 <div class="container" >
+=======
+<div class="container" ng-show="!editprofile">
+>>>>>>> c63432a2c074514c5647fc508ded6e25edf36488
 
 	<label>Welcome! {{username}}</label>
 	
@@ -13,4 +17,24 @@
 	
 	<br>
 
+<<<<<<< HEAD
+=======
+	<button ng-click="editprofile = !editprofile">Edit Profile</button>
+
+</div>
+
+<div class="container" ng-show="editprofile">
+<h>Edit Profile</h>
+<form ng-submit="SubmitEditProfile()">
+
+	<label>Username: {{username}}</label>
+	
+	<br>
+
+	<label>Email:</label>
+	<input type="text" name="email" ng-model="email">
+<button type="submit">Submit</button>
+</form>
+
+>>>>>>> c63432a2c074514c5647fc508ded6e25edf36488
 </div>
