@@ -17,6 +17,9 @@ app.use('/api', appRoutes);
 app.use('/user', userRoutes);
 app.use('/admin', adminRoutes);
 
+
+
+
 //define views folder
 app.use(express.static(__dirname + "/public")); 
 

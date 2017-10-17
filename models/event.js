@@ -14,7 +14,10 @@ var EventSchema = new Schema({
 					contact: String,
 					mobilecontact: String
 				},
-	status: String
+	status: String,
+	user_id: String,
+	lock: Boolean
+
 
 }, {collection: 'eventlist'});
 

@@ -11,7 +11,8 @@ angular.module('authServices', [])
 	};
 
 	authFactory.isLoggedIn = function(){
-		if(AuthToken.getToken()){
+		//console.log('get token = ' + AuthToken.getToken());
+		if(AuthToken.checkToken()){
 			return true;
 		}else{
 			return false;
@@ -19,16 +20,21 @@ angular.module('authServices', [])
 	};
 
 	authFactory.getUser = function(){
+		//console.log('get token = ' + AuthToken.getToken());
 		if(AuthToken.getToken()){
 			return $http.post('/user/currentUser');
 		}else{
-			$q.reject({message: 'User has no token'});
+			return false;
 		}
 	};
 
 	authFactory.logout = function(){
 		AuthToken.setToken();
 	};
+
+
+
+	
 
 	return authFactory;
 
@@ -40,10 +46,25 @@ angular.module('authServices', [])
 	//AuthToken.setToken(token);
 	authTokenFactory.setToken = function(token){
 		$window.localStorage.setItem('token', token);
-	}
+	};
+
 
 	authTokenFactory.getToken = function(){
+		
 		return $window.localStorage.getItem('token');
+		
+	};
+
+	authTokenFactory.checkToken = function(){
+		var temp = $window.localStorage.getItem('token');
+		//console.log('temp = ' + temp);
+		if(temp == '' || temp == 'undefined' || temp == null){
+			console.log('inside temp = false = ');
+			return false;
+		}else{
+			console.log('inside temp = true = ');
+			return true;
+		}
 	}
 
 	return authTokenFactory;

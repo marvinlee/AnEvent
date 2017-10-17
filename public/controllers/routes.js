@@ -26,7 +26,7 @@ angular.module('appRoutes', ['ngRoute'])
     })
     .when('/editevent/:event_id', {
       templateUrl: 'views/editevent.html',
-      controller: 'EventDetailsCtrl'
+      controller: 'EditEventController'
     })
     .when('/register', {
       templateUrl: 'views/userregister.html',
@@ -35,6 +35,22 @@ angular.module('appRoutes', ['ngRoute'])
     .when('/login', {
       templateUrl: 'views/userlogin.html',
       controller: 'AppCtrl'
+    })
+    .when('/userprofile', {
+      templateUrl: 'views/userprofile.html',
+      controller: 'AppCtrl'
+    })
+    .when('/adminprofile', {
+      templateUrl: 'views/adminuseraccount.html',
+      controller: 'AdminController'
+    })
+    .when('/approveevent', {
+      templateUrl: 'views/approveevent.html',
+      controller: 'AdminController'
+    })
+    .when('/approveeventdetails/:event_id', {
+      templateUrl: 'views/approveeventdetails.html',
+      controller: 'AdminEventDetailsController'
     })
     .otherwise({
       redirectTo: '/home'

@@ -3,15 +3,15 @@
 <form ng-submit="regUser()">
 
 	<label>Email:</label>
-	<input type="text" name="email" ng-model="regData.email">
+	<input type="text" name="email" ng-model="regData.email" required="required">
 	<br>
 
 	<label>Username:</label>
-	<input type="text" name="name" ng-model="regData.username">
+	<input type="text" name="name" ng-model="regData.username" required="required">
 	<br>
 
 	<label>Password:</label>
-	<input type="password" name="password" ng-model="regData.password">
+	<input type="password" name="password" ng-model="regData.password" required="required">
 	<br>
 	<button type="submit">Register</button>
 </form>
