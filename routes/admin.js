@@ -28,6 +28,7 @@ var User = require('../models/user');
         	res.send(docs);
     	});
 	});
+	});
 
 	//localhost:3000/admin/event/:event_id
 	router.get('/event/:event_id', function(req, res){
@@ -45,6 +46,7 @@ var User = require('../models/user');
         	res.send(docs);
     	});
 	});
+		});
 
 	//localhost:3000/admin/makeUserAdmin/user_id
 	router.put('/makeUserAdmin/:user_id', function(req, res){
@@ -77,5 +79,5 @@ var User = require('../models/user');
 		});
 	});
 
-
 module.exports = router;
+
