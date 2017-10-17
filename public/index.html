@@ -14,10 +14,14 @@
 	<div class="container" name="displayevents" ng-controller="AppCtrl">
 
 		<div>
-			<button ng-click="AddEventPage()">Add New Event</button>
-			<button ng-click="Register()">Register</button>
-			<button ng-click="LoginPage()">Login</button>
-			<button ng-click="Logout()">Logout</button>
+		<br>
+			
+			<a href="#!/home"><button >Home</button></a>
+			<a href="#!/register"><button ng-show="!isLoggedIn" >Register</button></a>
+			<a href="#!/login"><button ng-show="!isLoggedIn" >Login</button></a>
+			<a ><button ng-show="isLoggedIn" ng-click="MyAccount()">My Account</button></a>
+			<a href="#!/addevent"><button ng-show="isLoggedIn">Add New Event</button></a>
+			<a ><button ng-show="isLoggedIn" ng-click="Logout()">Logout</button></a>
 		</div>
 
 		<h1>Event Website</h1>
@@ -38,5 +42,10 @@
 	<script src="controllers/authServices.js"></script>
 	<script src="controllers/eventController.js"></script>
 	<script src="controllers/addEventController.js"></script>
+	<script src="controllers/adminController.js"></script>
+	<script src="controllers/editEventController.js"></script>
+	
+	
+	
 </body>
 </html>

@@ -6,6 +6,7 @@ var secret = 'testing';
 var Event = require('../models/event');
 var User = require('../models/user');
 
+
 	//localhost:3000/user/register
 	router.post('/register', function(req, res){
 		var user = new User();
@@ -32,7 +33,7 @@ var User = require('../models/user');
 	//localhost:3000/user/login
 	router.post('/login', function(req, res){
 
-		User.findOne({username : req.body.username }).select('email username password').exec(function(err, user){
+		User.findOne({username : req.body.username }).select('_id email username password usertype').exec(function(err, user){
 			
 			if(err){
 				throw err;
@@ -51,14 +52,36 @@ var User = require('../models/user');
 				if(!validPassword){
 					res.json({success : false, message : 'Wrong password found!'});
 				}else{
-					var token = jwt.sign({ username: user.username, email: user.email }, secret, {expiresIn: '24h'});
-					res.json({success : true, message : 'Welcome!', token : token});
+					var token = jwt.sign({ user_id: user._id, username: user.username, email: user.email, usertype: user.usertype}, secret, {expiresIn: '24h'});
+					res.json({success : true, message : 'Welcome!', token : token, usertype: user.usertype});
 				}
 
 			}
 
 		});
 
+	});
+
+	router.post('/joinevent', function(req, res){
+		var userevent = new UserEvent();
+		userevent.username = req.body.username;
+		userevent.user_id = req.body.user_id;
+		userevent.event_id = req.body.event_id;
+		
+		if(userevent.username == null || userevent.username == '' || userevent.user_id == null || userevent.user_id == '' || userevent.event_id == null || userevent.event_id == ''){
+			res.json({success: false, message: 'Failed to join event'});
+			
+		} else {
+			userevent.save(function(err){
+				if(err){
+					res.json({success: false, message: 'Event had been joined'});
+					
+				}else{
+					res.json({success: true, message: 'Successfully joined event'});
+					
+				}
+			});
+		}
 	});
 
 	/*router.post('/removeAllUser', function(req, res){
@@ -85,14 +108,13 @@ var User = require('../models/user');
 		});
 	});
 
-	router.put('/updateUserProfile/:user_id', function(req, res){
-		var query = {_id: req.params.user_id};
+	/*router.put('/updateUserProfile/:username', function(req, res){
+		var query = {username: req.params.username};
 		var user = new User();
-		user.username = req.body.username;
-		user.password = req.body.password;
+		
 		user.email = req.body.email;
-		user.usertype = req.body.usertype;
-		User.update(query, user,  function(err, doc){
+		console.log('check = ' + req.body.email);
+		User.update(query, user, function(err, doc){
 		    if (doc.nModified == 0){
 		    	return res.send({success: false});
 		    }else{
@@ -101,7 +123,25 @@ var User = require('../models/user');
 		    //return res.send(doc);
 		    
 		});
+	});*/
+
+	router.put('/updateUserProfile/:user_id', function(req, res){
+		console.log('email = ' + req.params.user_id);
+		var query = {_id: req.params.user_id};
+		var user = new User();
+		
+		//user.email = req.body.email;
+		
+		User.update(query, user,  function(err, doc){
+		    if (doc.nModified == 0){
+		    	return res.send({success: false});
+		    }else{
+		    	return res.send({success: true});
+		    }
+		    
+		});
 	});
+
 
 	router.use(function(req, res, next){
 		var token = req.body.token || req.body.query || req.headers['x-access-token'];
@@ -112,6 +152,7 @@ var User = require('../models/user');
 					res.json({success : false, message : 'Token invalid'});
 				}else{
 					req.decoded = decoded;
+					req.decoded.success = true;	
 					next();
 				}
 			});
@@ -120,6 +161,10 @@ var User = require('../models/user');
 		}
 	});
 
+	//localhost:3000/user/currentUserType
+	/*router.post('/currentUserType', function(req, res){
+		res.send(req.decoded.usertype);
+	});*/
 
 	//localhost:3000/user/currentUser
 	router.post('/currentUser', function(req, res){

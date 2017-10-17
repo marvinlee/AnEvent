@@ -8,13 +8,17 @@ var EventSchema = new Schema({
 	location: String,
 	type: String,
 	desc: String,
-	organizer: { 	organizationname: String,
+	organizer: { 	
+					organizationname: String,
 					personname: String,
 					email: String,
 					contact: String,
 					mobilecontact: String
 				},
-	status: String
+	status: String,
+	user_id: String,
+	lock: Boolean
+
 
 }, {collection: 'eventlist'});
 
