@@ -21,47 +21,49 @@ This program used MEAN stack to develop so that you need to install nodejs, mong
 
 # Coding Style Guideline
 
--constant variable name in UPPER_CASE, may include underscores
+Below is the guideline about coding style.
 
--function name in UpperCamelCase no underscores
+-Constant variable name in UPPER_CASE, may include underscores
 
--service name in lowerCamelCase no underscores 
+-Function name in UpperCamelCase no underscores
 
--variable name in lowercase, may include underscores
+-Service name in lowerCamelCase no underscores 
 
--filenames must be lowercase, may include underscores
+-Variable name in lowercase, may include underscores
 
--comment line can be used in //, /*...*/, for multiple line, subsequence line must have * in front of the line.
+-Filenames must be lowercase, may include underscores
 
--have whitespace between each function, in every function have whitespace in the beginning and ending of function code.
+-Comment line can be used in //, /*...*/, for multiple line, subsequence line must have * in front of the line.
 
--no line break before the opening braces
+-Have whitespace between each function, in every function have whitespace in the beginning and ending of function code.
 
--line break after opening braces
+-No line break before the opening braces
 
--line break before closing braces
+-Line break after opening braces
 
--line break after closing braces, if there are following by else, catch, while etc. no line break after closing braces.
+-Line break before closing braces
 
--for object array, have block-like structure for every variable.
+-Line break after closing braces, if there are following by else, catch, while etc. no line break after closing braces.
 
--for normal array, may use normal format a = [1,2,3];
+-For object array, have block-like structure for every variable.
 
--have comment on each function
+-For normal array, may use normal format a = [1,2,3];
 
--have a space before and after =, +, *, ^, /, () in formula or string for example a = a + b ^ c * d + (e + f) / g;
+-Have comment on each function
 
--use single quote rather than double quote for string
+-Have a space before and after =, +, *, ^, /, () in formula or string for example a = a + b ^ c * d + (e + f) / g;
 
--maximum 80 character in a line
+-Use single quote rather than double quote for string
 
--if there are many closing braces for a function, can be in the same line, for example )});
+-Maximum 80 character in a line
 
--if there are many closing braces for several function, should be in different line for different function
+-If there are many closing braces for a function, can be in the same line, for example )});
 
--have a line if there is nothing in braces {} for if, elseif, else, catch etc.
+-If there are many closing braces for several function, should be in different line for different function
 
--must have {} for if function even if there is only a line of code in it.
+-Have a line if there is nothing in braces {} for if, elseif, else, catch etc.
+
+-Must have {} for if function even if there is only a line of code in it.
 
 
 
