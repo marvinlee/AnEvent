@@ -1,6 +1,6 @@
 # Advanced Internet Programming – assignment 3 – AnEvent
 
-# Intro 
+# Introduction 
 
 Nowadays, with the development of technology, more people prefer to stay with tech equipments instead of attending activities. Therefore, we created the AnEvent to make more opportunities for people so that they can join interesting events.
 AnEvent is a platform about grouping events. It focus on these functions such as Register, Login, view and manage events. 
@@ -8,16 +8,29 @@ AnEvent is a platform about grouping events. It focus on these functions such as
 
 # Installation
 
-
-
-
-
 This program used MEAN stack to develop so that you need to install nodejs, mongoDB. 
 
+Installation for nodejs：
 
+Download the required installer:
+
+1. Go to https://nodejs.org/en/
+
+2. Select the button to download the LTS build that is "Recommended for most users".
+
+Install Node by double-clicking on the downloaded file and following the installation prompts.
+
+Installing Mongoose and MongoDB:
+
+1. Mongoose is installed in your project (package.json) like any other dependency — using NPM. To install it, use the following command inside your project folder:
+
+-npm install mongoose
+
+2. Connecting to MongoDB
 
 # Development environment 
 
+Node can be run on Windows, Mac OS X, many "flavours" of Linux. Express is run in a Node environment, and hence can run on any platform that runs Node.
 
 # Coding Style Guideline
 
