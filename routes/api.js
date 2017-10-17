@@ -216,13 +216,13 @@ var User = require('../models/user');
 router.post('/removeAllEvent', function(req, res){
 		Event.remove().exec();
 		Event.find({}, function(err, docs){
-<<<<<<< HEAD
+
 		
-=======
+
 			console.log('got User');
 			console.log(docs.data);
 
->>>>>>> c63432a2c074514c5647fc508ded6e25edf36488
+
         	res.send(docs);
 		});
 	});
