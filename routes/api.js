@@ -18,11 +18,10 @@ var User = require('../models/user');
 	router.get('/event', function(req, res){
 		//res.send("api works");
 		Event.find({status: 'Approved by Admin'}, function(err, docs){
-<<<<<<< HEAD
-=======
+
 			console.log('got Event');
 			console.log(docs.data);
->>>>>>> c63432a2c074514c5647fc508ded6e25edf36488
+
 
         	res.send(docs);
     	});
